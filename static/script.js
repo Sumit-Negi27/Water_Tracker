@@ -50,9 +50,28 @@ function addWater(amount) {
   .then(function () {
     // After adding, refresh the progress bar
     loadLogs();
+    loadTodayEntries();
   });
 }
 
+// ---------- Fetch today's individual entries and show as a list ----------
+function loadTodayEntries() {
+  fetch("/get_today_entries")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      const entriesSection = document.getElementById("entriesSection");
+      entriesSection.innerHTML = ""; // purani list saaf karo
+
+      data.entries.forEach(function (entry) {
+        const row = document.createElement("div");
+        row.className = "entry-row";
+        row.innerHTML = `<span>${entry.amount} ml</span><span>${entry.time}</span>`;
+        entriesSection.appendChild(row);
+      });
+    });
+} 
 
 // ---------- Quick add buttons (250ml, 500ml, 1L) ----------
 const quickButtons = document.querySelectorAll(".add-btn");
@@ -91,6 +110,42 @@ tipBtn.addEventListener("click", function () {
     tipText.textContent = data.tip;
   });
 });
+
+// ---------- Fetch weekly data and draw the graph ----------
+function loadWeeklyChart() {
+  fetch("/get_weekly_data")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      const ctx = document.getElementById("weeklyChart").getContext("2d");
+
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: data.labels,
+          datasets: [{
+            label: "Water (ml)",
+            data: data.totals,
+            backgroundColor: "#2e8bc0",
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: { beginAtZero: true }
+          }
+        }
+      });
+    });
+}
+
+// Draw the graph when page loads
+loadWeeklyChart();
 
 
 // ---------- Load logs when page first opens ----------

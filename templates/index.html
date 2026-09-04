@@ -6,6 +6,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
@@ -46,8 +47,18 @@
       <p id="tipText"></p>
     </div>
 
+    <!-- Weekly graph section -->
+  <div class="graph-section">
+    <p class="graph-title">Last 7 days</p>
+    <canvas id="weeklyChart"></canvas>
+  </div>
+  <!-- Today's individual entries -->
+<div class="entries-section" id="entriesSection">
+  <!-- JS yaha entries daalega -->
+</div>
   </div>
 
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

@@ -10,59 +10,65 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 16px;
   background: linear-gradient(135deg, #0c2340 0%, #145da0 50%, #0c2340 100%);
 }
 
 .tracker-container {
-  width: 380px;
+  width: 100%;
+  max-width: 380px;
   background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-  padding: 30px 26px;
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  padding: 32px 26px;
 }
 
 /* ---------- Header ---------- */
 .header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .header h1 {
-  font-size: 22px;
+  font-size: 24px;
+  font-weight: 600;
   color: #145da0;
+  letter-spacing: -0.3px;
 }
 
 .header p {
   font-size: 13px;
-  color: #888;
-  margin-top: 4px;
+  color: #9aa5b1;
+  margin-top: 6px;
 }
 
 /* ---------- Progress bar ---------- */
 .progress-section {
-  margin-bottom: 22px;
+  margin-bottom: 26px;
 }
 
 .progress-bar-bg {
   width: 100%;
-  height: 22px;
-  background: #e3f0fb;
-  border-radius: 12px;
+  height: 26px;
+  background: #eef5fb;
+  border-radius: 14px;
   overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .progress-bar-fill {
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg, #2e8bc0, #145da0);
-  border-radius: 12px;
-  transition: width 0.4s ease;
+  border-radius: 14px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .progress-text {
   text-align: center;
-  margin-top: 8px;
-  font-size: 14px;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 500;
   color: #333;
 }
 
@@ -70,72 +76,144 @@ body {
 .quick-add {
   display: flex;
   gap: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .add-btn {
   flex: 1;
-  padding: 12px 0;
+  padding: 13px 0;
   border: none;
-  border-radius: 12px;
-  background: #145da0;
-  color: white;
+  border-radius: 14px;
+  background: #eef5fb;
+  color: #145da0;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.15s ease;
+  transition: all 0.2s ease;
 }
 
 .add-btn:hover {
+  background: #145da0;
+  color: white;
   transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(20, 93, 160, 0.25);
+}
+
+.add-btn:active {
+  transform: translateY(0);
 }
 
 /* ---------- Custom add ---------- */
 .custom-add {
   display: flex;
   gap: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
 }
 
 #customAmount {
   flex: 1;
-  padding: 10px 14px;
-  border: 1px solid #cde3f5;
-  border-radius: 10px;
+  padding: 12px 16px;
+  border: 1.5px solid #eef5fb;
+  border-radius: 12px;
   outline: none;
   font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  transition: border-color 0.2s ease;
+}
+
+#customAmount:focus {
+  border-color: #2e8bc0;
 }
 
 #customAddBtn {
-  padding: 10px 18px;
+  padding: 12px 20px;
   border: none;
-  border-radius: 10px;
-  background: #2e8bc0;
+  border-radius: 12px;
+  background: #145da0;
   color: white;
   cursor: pointer;
   font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.15s ease;
+}
+
+#customAddBtn:hover {
+  transform: translateY(-2px);
 }
 
 /* ---------- AI section ---------- */
 .ai-section {
-  border-top: 1px solid #eee;
-  padding-top: 18px;
+  border-top: 1.5px solid #f2f2f2;
+  padding-top: 20px;
   text-align: center;
 }
 
 #tipBtn {
-  padding: 10px 20px;
+  padding: 12px 22px;
   border: none;
-  border-radius: 20px;
+  border-radius: 22px;
   background: linear-gradient(120deg, #7c3aed, #a855f7);
   color: white;
   font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+#tipBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(124, 58, 237, 0.3);
 }
 
 #tipText {
-  margin-top: 14px;
-  font-size: 13px;
+  margin-top: 16px;
+  font-size: 13.5px;
   color: #444;
-  line-height: 1.5;
+  line-height: 1.6;
+  min-height: 20px;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 400px) {
+  .tracker-container {
+    padding: 24px 18px;
+  }
+
+  .header h1 {
+    font-size: 20px;
+  }
+}
+
+/* ---------- Weekly graph ---------- */
+.graph-section {
+  border-top: 1.5px solid #f2f2f2;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.graph-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+/* ---------- Today's entries list ---------- */
+.entries-section {
+  margin-bottom: 20px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.entry-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 10px;
+  font-size: 13px;
+  color: #555;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.entry-row:last-child {
+  border-bottom: none;
 }
