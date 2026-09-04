@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Water Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="tracker-container">
+
+    <!-- Header -->
+    <div class="header">
+      <h1>Water Tracker 💧</h1>
+      <p>Stay hydrated, stay healthy</p>
+    </div>
+
+    <!-- Progress section -->
+    <div class="progress-section">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+      <p class="progress-text">
+        <span id="currentAmount">0</span> ml / <span id="goalAmount">3000</span> ml
+      </p>
+    </div>
+
+    <!-- Quick add buttons -->
+    <div class="quick-add">
+      <button class="add-btn" data-amount="250">+250ml</button>
+      <button class="add-btn" data-amount="500">+500ml</button>
+      <button class="add-btn" data-amount="1000">+1L</button>
+    </div>
+
+    <!-- Custom amount input -->
+    <div class="custom-add">
+      <input type="number" id="customAmount" placeholder="Custom amount (ml)" />
+      <button id="customAddBtn">Add</button>
+    </div>
+
+    <!-- AI Tip section -->
+    <div class="ai-section">
+      <button id="tipBtn">✨ Get AI Hydration Tip</button>
+      <p id="tipText"></p>
+    </div>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
