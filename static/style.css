@@ -1,3 +1,6 @@
+/* ================================
+   Base setup
+================================ */
 * {
   margin: 0;
   padding: 0;
@@ -7,46 +10,72 @@
 
 body {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  background: linear-gradient(135deg, #0c2340 0%, #145da0 50%, #0c2340 100%);
+  padding: 24px;
+  background: linear-gradient(135deg, #0c2340 0%, #145da0 60%, #0c2340 100%);
 }
 
+/* ================================
+   Page wrapper
+   On mobile: normal stacked layout
+   On desktop: becomes a grid (see media query below)
+================================ */
 .tracker-container {
   width: 100%;
-  max-width: 380px;
-  background: #ffffff;
-  border-radius: 24px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
-  padding: 32px 26px;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
-/* ---------- Header ---------- */
+/* ================================
+   Every section becomes its own
+   floating white "card"
+================================ */
+.header,
+.progress-section,
+.entries-section,
+.quick-add,
+.custom-add,
+.ai-section,
+.graph-section {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  padding: 22px 20px;
+}
+
+/* Quick-add and custom-add are small, so less padding looks better */
+.quick-add,
+.custom-add {
+  padding: 16px 18px;
+}
+
+/* ================================
+   Header
+================================ */
 .header {
   text-align: center;
-  margin-bottom: 28px;
+  background: linear-gradient(120deg, #145da0, #2e8bc0);
+  box-shadow: 0 15px 35px rgba(20, 93, 160, 0.35);
 }
 
 .header h1 {
   font-size: 24px;
   font-weight: 600;
-  color: #145da0;
+  color: #ffffff;
   letter-spacing: -0.3px;
 }
 
 .header p {
   font-size: 13px;
-  color: #9aa5b1;
+  color: #d6ecfa;
   margin-top: 6px;
 }
 
-/* ---------- Progress bar ---------- */
-.progress-section {
-  margin-bottom: 26px;
-}
-
+/* ================================
+   Progress bar
+================================ */
 .progress-bar-bg {
   width: 100%;
   height: 26px;
@@ -66,21 +95,47 @@ body {
 
 .progress-text {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 12px;
   font-size: 15px;
   font-weight: 500;
   color: #333;
 }
 
-/* ---------- Quick add buttons ---------- */
+/* ================================
+   Today's entries list
+================================ */
+.entries-section {
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.entry-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 4px;
+  font-size: 13.5px;
+  color: #555;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.entry-row:last-child {
+  border-bottom: none;
+}
+
+/* ================================
+   Quick add buttons
+   flex-wrap lets buttons drop to a
+   new line instead of overflowing
+================================ */
 .quick-add {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 18px;
 }
 
 .add-btn {
-  flex: 1;
+  flex: 1 1 90px;
+  min-width: 0;
   padding: 13px 0;
   border: none;
   border-radius: 14px;
@@ -103,15 +158,21 @@ body {
   transform: translateY(0);
 }
 
-/* ---------- Custom add ---------- */
+/* ================================
+   Custom amount input
+   min-width: 0 is the key fix —
+   without it, the input refuses to
+   shrink and pushes the button off
+================================ */
 .custom-add {
   display: flex;
-  gap: 8px;
-  margin-bottom: 26px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 #customAmount {
-  flex: 1;
+  flex: 1 1 160px;
+  min-width: 0;
   padding: 12px 16px;
   border: 1.5px solid #eef5fb;
   border-radius: 12px;
@@ -126,7 +187,8 @@ body {
 }
 
 #customAddBtn {
-  padding: 12px 20px;
+  flex: 0 0 auto;
+  padding: 12px 22px;
   border: none;
   border-radius: 12px;
   background: #145da0;
@@ -134,6 +196,7 @@ body {
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
+  white-space: nowrap;
   transition: transform 0.15s ease;
 }
 
@@ -141,10 +204,10 @@ body {
   transform: translateY(-2px);
 }
 
-/* ---------- AI section ---------- */
+/* ================================
+   AI hydration tip
+================================ */
 .ai-section {
-  border-top: 1.5px solid #f2f2f2;
-  padding-top: 20px;
   text-align: center;
 }
 
@@ -167,53 +230,80 @@ body {
 
 #tipText {
   margin-top: 16px;
-  font-size: 13.5px;
-  color: #444;
-  line-height: 1.6;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.7;
   min-height: 20px;
 }
 
-/* ---------- Small screens ---------- */
-@media (max-width: 400px) {
+/* ================================
+   Weekly graph
+================================ */
+.graph-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #888;
+  margin-bottom: 14px;
+}
+
+.graph-section {
+  height: 300px;
+}
+
+#weeklyChart {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ================================
+   DESKTOP LAYOUT
+   Turns the stacked cards into a
+   two-column dashboard using
+   CSS Grid "named areas"
+================================ */
+@media (min-width: 900px) {
   .tracker-container {
-    padding: 24px 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "header    header"
+      "progress  entries"
+      "quickadd  graph"
+      "customadd ai";
+    gap: 20px;
+  }
+
+  .header          { grid-area: header; }
+  .progress-section{ grid-area: progress; }
+  .entries-section { grid-area: entries; }
+  .quick-add       { grid-area: quickadd; }
+  .graph-section   { grid-area: graph; }
+  .custom-add      { grid-area: customadd; }
+  .ai-section      { grid-area: ai; }
+
+  .header h1 { font-size: 28px; }
+}
+
+/* ================================
+   Small phones — tighten spacing
+================================ */
+@media (max-width: 400px) {
+  body {
+    padding: 14px;
+  }
+
+  .header,
+  .progress-section,
+  .entries-section,
+  .quick-add,
+  .custom-add,
+  .ai-section,
+  .graph-section {
+    padding: 16px 14px;
   }
 
   .header h1 {
     font-size: 20px;
   }
-}
-
-/* ---------- Weekly graph ---------- */
-.graph-section {
-  border-top: 1.5px solid #f2f2f2;
-  margin-top: 20px;
-  padding-top: 20px;
-}
-
-.graph-title {
-  font-size: 13px;
-  font-weight: 500;
-  color: #888;
-  margin-bottom: 12px;
-}
-
-/* ---------- Today's entries list ---------- */
-.entries-section {
-  margin-bottom: 20px;
-  max-height: 120px;
-  overflow-y: auto;
-}
-
-.entry-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 10px;
-  font-size: 13px;
-  color: #555;
-  border-bottom: 1px solid #f5f5f5;
-}
-
-.entry-row:last-child {
-  border-bottom: none;
 }
